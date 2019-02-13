@@ -7,7 +7,7 @@ import (
 	"gopkg.in/src-d/go-git.v4"
 )
 
-func TestList(t *testing.T) {
+func TestFindPullRequestReference(t *testing.T) {
 	// like ls-remote
 	r, err := git.PlainOpen(".")
 	if err != nil {
