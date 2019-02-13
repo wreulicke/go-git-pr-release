@@ -30,3 +30,9 @@ func FindPullRequestReference(r *git.Repository) ([]*plumbing.Reference, error) 
 
 	return result, nil
 }
+
+func FilterMergedPullRequest(r *git.Repository, refs []*plumbing.Reference) ([]*plumbing.Reference, error) {
+	c, _ := r.CommitObject(refs[0].Hash())
+	c.Parents().
+	return nil, nil
+}
