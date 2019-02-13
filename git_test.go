@@ -59,14 +59,14 @@ func TestFilterMergedPullRequest(t *testing.T) {
 	t.Log(results)
 	var contains bool
 	for _, v := range results {
-		if v.Name() == "refs/pull/1/head" {
+		if v.Name() == "refs/pull/2/head" {
 			contains = true
-		} else if v.Name() == "refs/pull/2/head" {
-			t.Error("refs/pull/2/head should not be contained")
+		} else if v.Name() == "refs/pull/1/head" {
+			t.Error("refs/pull/1/head should not be contained")
 		}
 	}
 	if !contains {
 		t.Logf("Results: %v", results)
-		t.Error("refs/pull/1/head is not found")
+		t.Error("refs/pull/2/head is not found")
 	}
 }

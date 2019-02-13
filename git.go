@@ -62,7 +62,7 @@ func FindMergeBase(r *git.Repository, c1 *object.Commit, c2 *object.Commit) (*ob
 	}
 }
 
-// FilterMergedPullRequest returns merged reference from refs.
+// FilterMergedPullRequest returns not-merged reference from refs.
 func FilterMergedPullRequest(r *git.Repository, productionRef *plumbing.Reference, refs []*plumbing.Reference) (results []*plumbing.Reference, err error) {
 	productionHead, err := r.CommitObject(productionRef.Hash())
 	if err != nil {
@@ -78,7 +78,7 @@ func FilterMergedPullRequest(r *git.Repository, productionRef *plumbing.Referenc
 		if err != nil {
 			return nil, err
 		}
-		if base.Hash == c.Hash {
+		if base.Hash != c.Hash {
 			results = append(results, ref)
 		}
 	}
