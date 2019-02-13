@@ -1,7 +1,6 @@
 package main
 
 import (
-	"strings"
 	"testing"
 
 	"gopkg.in/src-d/go-git.v4"
@@ -22,7 +21,7 @@ func TestFindPullRequestReference(t *testing.T) {
 
 	var contains bool
 	for _, ref := range refs {
-		if strings.HasPrefix(string(ref.Name()), "refs/pull/") && strings.HasSuffix(string(ref.Name()), "/head") {
+		if ref.Name() == "refs/pull/1/head" {
 			contains = true
 		}
 	}
