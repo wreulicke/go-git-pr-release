@@ -8,11 +8,11 @@ import (
 )
 
 func TestList(t *testing.T) {
+	// like ls-remote
 	r, _ := git.PlainOpen(".")
 	re, _ := r.Remote("origin")
 	rfs, _ := re.List(&git.ListOptions{})
 	for _, rf := range rfs {
 		fmt.Println(rf.Name())
 	}
-	t.Error("aaaaaaaaaa")
 }
