@@ -70,3 +70,36 @@ func TestFilterMergedPullRequest(t *testing.T) {
 		t.Error("refs/pull/2/head is not found")
 	}
 }
+
+func TestGetBranchReference(t *testing.T) {
+	r, err := git.PlainOpen(".")
+	if err != nil {
+		t.Error(err)
+		return
+	}
+	_, err = r.Reference(plumbing.NewRemoteReferenceName("origin", "master"), true)
+	if err != nil {
+		t.Error(err)
+		return
+	}
+}
+
+func TestCreateBranchReference(t *testing.T) {
+	r, err := git.PlainOpen(".")
+	if err != nil {
+		t.Error(err)
+		return
+	}
+	head, _ := r.Head()
+	w, err := r.Worktree()
+	w.Checkout(&git.CheckoutOptions{
+		Create: true,
+		Branch: "release/2019-02-XXXXXX",
+	})
+	err = r.Storer.SetReference(plumbing.NewReferenceFromStrings("release/2019-02-XXXXXX", head.Hash().String()))
+	if err != nil {
+		t.Error(err)
+		return
+	}
+}
+
